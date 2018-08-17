@@ -5,12 +5,19 @@ import numpy as np
 import math  # NOQA
 import pytest
 from datetime import timedelta as delta
+<<<<<<< HEAD
 import os
+=======
+
+>>>>>>> e07a93f906c52f4cfaf434d59ed23a272b5577b0
 
 ptype = {'scipy': ScipyParticle, 'jit': JITParticle}
 method = {'RK4': AdvectionRK4, 'EE': AdvectionEE, 'RK45': AdvectionRK45}
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> e07a93f906c52f4cfaf434d59ed23a272b5577b0
 def AdvectionAnalytical(particle, fieldset, time, dt):
     """Advection of particles using 'analytical advection' integration
     Based on Ariane/TRACMASS algorithm, as detailed in e.g. Doos et al (https://doi.org/10.5194/gmd-10-1733-2017)
@@ -324,17 +331,29 @@ def test_peninsula_fieldset(mode, mesh):
     pset = pensinsula_example(fieldset, 5, mode=mode, degree=1)
     # Test advection accuracy by comparing streamline values
     err_adv = np.array([abs(p.p_start - p.p) for p in pset])
+<<<<<<< HEAD
     assert(err_adv <= 1.e-2).all()
     # Test Field sampling accuracy by comparing kernel against Field sampling
     err_smpl = np.array([abs(p.p - pset.fieldset.P[0., p.lon, p.lat, p.depth]) for p in pset])
     assert(err_smpl <= 1.e-2).all()
+=======
+    assert(err_adv <= 1.e-3).all()
+    # Test Field sampling accuracy by comparing kernel against Field sampling
+    err_smpl = np.array([abs(p.p - pset.fieldset.P[0., p.lon, p.lat, p.depth]) for p in pset])
+    assert(err_smpl <= 1.e-3).all()
+>>>>>>> e07a93f906c52f4cfaf434d59ed23a272b5577b0
 
 
 def test_peninsula_fieldset_AnalyticalAdvection():
     """Execute peninsula test using Analytical Advection on C grid"""
+<<<<<<< HEAD
     grid_type = "C"
     fieldset = peninsula_fieldset(100, 50, 'flat')
     fieldset.grid_type = grid_type
+=======
+    grid_type = 'C'
+    fieldset = peninsula_fieldset(100, 50, 'flat', grid_type=grid_type)
+>>>>>>> e07a93f906c52f4cfaf434d59ed23a272b5577b0
     fieldset.U.grid_type = grid_type
     fieldset.V.grid_type = grid_type
     fieldset.U.interp_method = 'cgrid_linear'
@@ -342,7 +361,11 @@ def test_peninsula_fieldset_AnalyticalAdvection():
     pset = pensinsula_example(fieldset, npart=10, mode='scipy', method=AdvectionAnalytical)
     # Test advection accuracy by comparing streamline values
     err_adv = np.array([abs(p.p_start - p.p) for p in pset])
+<<<<<<< HEAD
     assert(err_adv <= 1.e-2).all()
+=======
+    assert(err_adv <= 1.e-3).all()
+>>>>>>> e07a93f906c52f4cfaf434d59ed23a272b5577b0
 
 
 @pytest.fixture(scope='module')
@@ -361,10 +384,17 @@ def test_peninsula_file(fieldsetfile, mode):
     pset = pensinsula_example(fieldset, 5, mode=mode, degree=1)
     # Test advection accuracy by comparing streamline values
     err_adv = np.array([abs(p.p_start - p.p) for p in pset])
+<<<<<<< HEAD
     assert(err_adv <= 1.e-2).all()
     # Test Field sampling accuracy by comparing kernel against Field sampling
     err_smpl = np.array([abs(p.p - pset.fieldset.P[0., p.lon, p.lat, p.depth]) for p in pset])
     assert(err_smpl <= 1.e-2).all()
+=======
+    assert(err_adv <= 1.e-3).all()
+    # Test Field sampling accuracy by comparing kernel against Field sampling
+    err_smpl = np.array([abs(p.p - pset.fieldset.P[0., p.lon, p.lat, p.depth]) for p in pset])
+    assert(err_smpl <= 1.e-3).all()
+>>>>>>> e07a93f906c52f4cfaf434d59ed23a272b5577b0
 
 
 if __name__ == "__main__":
